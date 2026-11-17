@@ -9,11 +9,11 @@ export class GuideService {
     {
       id: 1,
       nom: 'Bakhoum',
-      prenom: 'Mamadou',
+      prenom: 'Papa Abdoulaye',
       specialite: 'Mangroves et écotourisme',
       region: 'Ziguinchor',
       telephone: '+221 77 123 45 67',
-      email: 'mamadou.bakhoum@uasz.edu.sn',
+      email: 'papa.bakhoum@uasz.edu.sn',
       note: 4.8,
       disponible: true
     },
