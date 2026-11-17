@@ -19,25 +19,25 @@ export class GuideService {
     },
     {
       id: 2,
-      nom: 'Sagna',
-      prenom: 'Fatou',
+      nom: 'Drame',
+      prenom: 'Abdoulaye',
       specialite: 'Patrimoine culturel et traditions',
-      region: 'Ziguinchor',
-      telephone: '+221 76 987 65 43',
-      email: 'fatou.sagna@uasz.edu.sn',
-      note: 4.5,
-      disponible: false
+      region: 'Dakar',
+      telephone: '+221 78 309 42 95',
+      email: 'adoulaye.drame@uasz.edu.sn',
+      note: 4.7,
+      disponible: true
     },
     {
       id: 3,
-      nom: 'Faye',
-      prenom: 'Ousmane',
+      nom: 'Dabo',
+      prenom: 'Mouhamed',
       specialite: 'Salines et traditions du Sine-Saloum',
       region: 'Fatick',
       telephone: '+221 78 456 78 90',
-      email: 'ousmane.faye@uasz.edu.sn',
+      email: 'mouhamed.dabo@uasz.edu.sn',
       note: 4.9,
-      disponible: true
+      disponible: false
     }
   ];
 
