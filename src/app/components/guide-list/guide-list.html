@@ -1,0 +1,102 @@
+<section class="guide-list" aria-labelledby="titre-liste">
+  <h2 id="titre-liste">Répertoire des guides touristiques</h2>
+
+  <!-- Recherche + filtres -->
+  <form class="filtres" role="search" (submit)="$event.preventDefault()">
+    <div class="champ champ-recherche">
+      <label for="recherche">Rechercher (nom, prénom ou spécialité)</label>
+      <input
+        id="recherche"
+        type="search"
+        placeholder="Ex : Aminata, Diop, écotourisme…"
+        autocomplete="off"
+        [value]="recherche()"
+        (input)="onRecherche($event)"
+      />
+    </div>
+
+    <div class="champ">
+      <label for="filtre-region">Région</label>
+      <select id="filtre-region" (change)="onRegion($event)">
+        <option value="" [selected]="regionChoisie() === ''">Toutes les régions</option>
+        @for (region of regions(); track region) {
+          <option [value]="region" [selected]="region === regionChoisie()">{{ region }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="champ">
+      <label for="filtre-statut">Statut</label>
+      <select id="filtre-statut" (change)="onStatut($event)">
+        <option value="" [selected]="statutChoisi() === ''">Tous les statuts</option>
+        <option value="disponible" [selected]="statutChoisi() === 'disponible'">Disponible</option>
+        <option value="indisponible" [selected]="statutChoisi() === 'indisponible'">
+          Indisponible
+        </option>
+      </select>
+    </div>
+
+    <button type="button" class="btn-reset" (click)="reinitialiser()" [disabled]="!filtresActifs()">
+      Réinitialiser
+    </button>
+  </form>
+
+  <!-- Compteur annoncé aux lecteurs d'écran -->
+  <p class="compteur" role="status" aria-live="polite">
+    {{ guidesFiltres().length }} guide(s) affiché(s) sur {{ guides().length }}
+  </p>
+
+  <!-- Résultats -->
+  @if (guidesFiltres().length > 0) {
+    <ul class="cartes">
+      @for (guide of guidesFiltres(); track guide.id) {
+        <li class="carte">
+          <header class="carte-entete">
+            <h3>{{ guide.prenom }} {{ guide.nom }}</h3>
+            @if (guide.disponible) {
+              <span class="badge badge-disponible">Disponible</span>
+            } @else {
+              <span class="badge badge-indisponible">Indisponible</span>
+            }
+          </header>
+
+          <dl class="carte-infos">
+            <div>
+              <dt>Région</dt>
+              <dd>{{ guide.region }}</dd>
+            </div>
+            <div>
+              <dt>Spécialité</dt>
+              <dd>{{ guide.specialite }}</dd>
+            </div>
+            <div>
+              <dt>Téléphone</dt>
+              <dd>{{ guide.telephone }}</dd>
+            </div>
+            <div>
+              <dt>E-mail</dt>
+              <dd class="email">{{ guide.email }}</dd>
+            </div>
+            <div>
+              <dt>Note</dt>
+              <dd class="note"><span aria-hidden="true">★</span> {{ guide.note | noteFormat }}</dd>
+            </div>
+          </dl>
+        </li>
+      }
+    </ul>
+  } @else if (guides().length === 0) {
+    <div class="etat-vide">
+      <p><strong>Aucun guide enregistré pour le moment.</strong></p>
+      <p>Ajoutez un premier guide avec le formulaire.</p>
+    </div>
+  } @else {
+    <div class="etat-vide">
+      <p><strong>Aucun guide ne correspond à votre recherche.</strong></p>
+      <p>Vérifiez l'orthographe ou modifiez les filtres.</p>
+      <button type="button" class="btn-reset" (click)="reinitialiser()">
+        Réinitialiser la recherche et les filtres
+      </button>
+    </div>
+  }
+</section>
