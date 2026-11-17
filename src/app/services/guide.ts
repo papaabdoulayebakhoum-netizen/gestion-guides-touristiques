@@ -38,8 +38,30 @@ export class GuideService {
       email: 'mouhamed.dabo@uasz.edu.sn',
       note: 4.9,
       disponible: false
-    }
-  ];
+    },
+    {
+  id: 4,
+  nom: 'Ndiaye',
+  prenom: 'Cheikh',
+  specialite: 'Histoire et patrimoine de Saint-Louis',
+  region: 'Saint-Louis',
+  telephone: '+221 77 321 45 67',
+  email: 'cheikh.ndiaye@example.com',
+  note: 4.6,
+  disponible: true
+},
+{
+  id: 5,
+  nom: 'Camara',
+  prenom: 'Aissatou',
+  specialite: 'Tourisme balnéaire et découverte des plages',
+  region: 'Dakar',
+  telephone: '+221 76 543 21 09',
+  email: 'aissatou.camara@example.com',
+  note: 4.3,
+  disponible: false
+},  
+];
 
   constructor() { }
 
