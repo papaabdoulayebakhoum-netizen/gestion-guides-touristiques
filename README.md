@@ -1,59 +1,90 @@
-# GestionGuidesTouristiques
+# Gestion des guides touristiques
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.6.
+Application Angular de gestion d'un répertoire de guides touristiques au Sénégal : consulter, rechercher, filtrer, ajouter, modifier et supprimer des fiches.
+Projet d'évaluation finale — *Développement front-end*, Licence 2 Ingénierie Informatique, UASZ.
 
-## Development server
+> Toutes les données sont **fictives** (aucune donnée personnelle réelle).
 
-To start a local development server, run:
+![Liste des guides](docs/captures/liste-des-guides.png)
 
-```bash
-ng serve
-```
+## Prérequis
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+| Outil | Version | Vérification |
+|---|---|---|
+| [Node.js](https://nodejs.org) | version LTS récente (compatible Angular 22) | `node --version` |
+| npm | fourni avec Node.js | `npm --version` |
+| [Git](https://git-scm.com) | n'importe quelle version récente | `git --version` |
 
-## Code scaffolding
+Angular CLI est installé avec le projet : pas besoin de l'installer globalement (on utilise `npm start`).
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**Windows / PowerShell** : si `npm` répond « l'exécution de scripts est désactivée sur ce système », tapez une fois
+`Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, puis relancez la commande.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Installation
 
 ```bash
-ng build
+git clone https://github.com/papaabdoulayebakhoum-netizen/gestion-guides-touristiques.git
+cd gestion-guides-touristiques
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Lancement
 
 ```bash
-ng test
+npm start
 ```
 
-## Running end-to-end tests
+Ouvrir <http://localhost:4200/>. L'application se recharge automatiquement quand un fichier change. `Ctrl+C` arrête le serveur.
 
-For end-to-end (e2e) testing, run:
+## Autres commandes
 
-```bash
-ng e2e
+| Commande | Rôle |
+|---|---|
+| `npm run build` | compile le projet dans `dist/` |
+| `npm test` | lance les tests unitaires (Vitest) |
+
+## Fonctionnalités
+
+| Partie | Contenu | Documentation |
+|---|---|---|
+| A | Projet Angular, interface `GuideTouristique`, composants, service | `src/app/models/`, `src/app/services/` |
+| B, C | Liste en cartes, recherche, filtres région et statut, pipe de la note, badges | [docs/README-parties-B-C.md](docs/README-parties-B-C.md) |
+| D, E | Ajout, modification, suppression, validation, messages, accessibilité, limites, évolution vers une API REST | [docs/README-parties-D-E.md](docs/README-parties-D-E.md) |
+
+## Pages de l'application
+
+| Adresse | Écran |
+|---|---|
+| `/guides` | répertoire (liste, recherche, filtres, boutons Modifier / Supprimer) |
+| `/guides/nouveau` | formulaire d'ajout |
+| `/guides/:id/modifier` | formulaire de modification |
+
+Captures : [liste](docs/captures/liste-des-guides.png), [validation du formulaire](docs/captures/formulaire-validation.png), [confirmation de suppression](docs/captures/confirmation-suppression.png).
+
+## Structure
+
+```
+src/app/
+├── components/
+│   ├── guide-list/      liste, recherche, filtres, suppression
+│   ├── guide-form/      formulaire d'ajout et de modification
+│   ├── notification/    messages de succès et d'erreur
+│   └── not-found/       page introuvable
+├── models/              interface GuideTouristique, liste des régions
+├── pipes/               pipe de formatage de la note
+├── services/            GuideService (données), NotificationService (messages)
+├── app.routes.ts        routes
+└── app.ts / app.html    en-tête, navigation, zone des pages
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Bibliothèques utilisées
 
-## Additional Resources
+Uniquement les paquets standard d'Angular 22 (`@angular/core`, `common`, `forms`, `router`, `platform-browser`), RxJS et TypeScript. Tests : Vitest et jsdom. Aucune bibliothèque d'interface externe, aucune police ni image externe.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Limites
+
+- Les données ne sont **pas enregistrées** : un rechargement remet les guides de démonstration.
+- La validation se fait **côté client** ; dans une application réelle, le serveur doit aussi tout valider.
+- Pas d'authentification.
+
+Détails et évolution possible vers une API REST : [docs/README-parties-D-E.md](docs/README-parties-D-E.md).

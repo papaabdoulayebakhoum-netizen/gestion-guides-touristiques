@@ -1,0 +1,21 @@
+<!-- La zone reste dans la page en permanence : les lecteurs d'écran annoncent son contenu quand il change. -->
+<div class="zone" aria-live="polite" aria-atomic="true">
+  @if (notification.message(); as message) {
+    <div class="message" [class.erreur]="message.type === 'erreur'">
+      <span class="icone" aria-hidden="true">{{ message.type === 'erreur' ? '⚠' : '✓' }}</span>
+      <p>
+        <strong>{{ message.type === 'erreur' ? 'Erreur : ' : 'Succès : ' }}</strong>{{
+          message.texte
+        }}
+      </p>
+      <button
+        type="button"
+        class="fermer"
+        (click)="notification.fermer()"
+        aria-label="Fermer le message"
+      >
+        ×
+      </button>
+    </div>
+  }
+</div>

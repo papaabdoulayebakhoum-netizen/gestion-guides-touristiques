@@ -1,0 +1,107 @@
+<section class="guide-form" aria-labelledby="titre-formulaire">
+  <h2 id="titre-formulaire">{{ titre }}</h2>
+
+  @if (introuvable) {
+    <div class="etat-vide">
+      <p><strong>Aucun guide ne correspond à cette adresse.</strong></p>
+      <p>La fiche a peut-être été supprimée.</p>
+      <a routerLink="/guides" class="btn btn-primary">Retour au répertoire</a>
+    </div>
+  } @else {
+    <p class="aide-champs">
+      Les champs marqués d'un <span aria-hidden="true">*</span
+      ><span class="sr-only">astérisque</span> sont obligatoires.
+    </p>
+
+    <!-- `novalidate` : on affiche nos propres messages au lieu des bulles du navigateur. -->
+    <form [formGroup]="formulaire" (ngSubmit)="soumettre()" novalidate>
+      <div class="grille">
+        @for (champ of champsTexte; track champ.nom) {
+          @let erreur = messageErreur(champ.nom);
+          <div class="champ">
+            <label [for]="'champ-' + champ.nom">
+              {{ champ.libelle }} <span class="obligatoire" aria-hidden="true">*</span>
+            </label>
+            <input
+              [id]="'champ-' + champ.nom"
+              [type]="champ.type"
+              [formControlName]="champ.nom"
+              [attr.autocomplete]="champ.autocomplete"
+              [attr.aria-invalid]="erreur ? 'true' : null"
+              [attr.aria-describedby]="
+                erreur ? 'erreur-' + champ.nom : champ.aide ? 'aide-' + champ.nom : null
+              "
+              aria-required="true"
+              required
+            />
+            @if (erreur) {
+              <p class="erreur" [id]="'erreur-' + champ.nom">{{ erreur }}</p>
+            } @else if (champ.aide) {
+              <p class="aide" [id]="'aide-' + champ.nom">{{ champ.aide }}</p>
+            }
+          </div>
+        }
+
+        @let erreurRegion = messageErreur('region');
+        <div class="champ">
+          <label for="champ-region"
+            >Région <span class="obligatoire" aria-hidden="true">*</span></label
+          >
+          <select
+            id="champ-region"
+            formControlName="region"
+            [attr.aria-invalid]="erreurRegion ? 'true' : null"
+            [attr.aria-describedby]="erreurRegion ? 'erreur-region' : null"
+            aria-required="true"
+            required
+          >
+            <option value="" disabled>Choisir une région</option>
+            @for (region of regions; track region) {
+              <option [value]="region">{{ region }}</option>
+            }
+          </select>
+          @if (erreurRegion) {
+            <p class="erreur" id="erreur-region">{{ erreurRegion }}</p>
+          }
+        </div>
+
+        @let erreurNote = messageErreur('note');
+        <div class="champ">
+          <label for="champ-note"
+            >Note (de 0 à 5) <span class="obligatoire" aria-hidden="true">*</span></label
+          >
+          <input
+            id="champ-note"
+            type="number"
+            formControlName="note"
+            min="0"
+            max="5"
+            step="0.1"
+            inputmode="decimal"
+            [attr.aria-invalid]="erreurNote ? 'true' : null"
+            [attr.aria-describedby]="erreurNote ? 'erreur-note' : 'aide-note'"
+            aria-required="true"
+            required
+          />
+          @if (erreurNote) {
+            <p class="erreur" id="erreur-note">{{ erreurNote }}</p>
+          } @else {
+            <p class="aide" id="aide-note">Ex : 4.5</p>
+          }
+        </div>
+      </div>
+
+      <div class="case">
+        <input id="champ-disponible" type="checkbox" formControlName="disponible" />
+        <label for="champ-disponible">Ce guide est disponible</label>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary">
+          {{ modeModification ? 'Enregistrer les modifications' : 'Ajouter le guide' }}
+        </button>
+        <a routerLink="/guides" class="btn btn-secondary">Annuler</a>
+      </div>
+    </form>
+  }
+</section>

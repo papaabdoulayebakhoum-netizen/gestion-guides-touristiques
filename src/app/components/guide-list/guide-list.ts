@@ -1,5 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  computed,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { GuideTouristique } from '../../models/guide-touristique.model';
 import { GuideService } from '../../services/guide';
+import { NotificationService } from '../../services/notification';
 import { NoteFormatPipe } from '../../pipes/note-format-pipe';
 
 /** Statut affiché et filtré : déduit du champ booléen `disponible` du modèle. */
@@ -16,13 +27,14 @@ function normaliser(texte: string): string {
 
 @Component({
   selector: 'app-guide-list',
-  imports: [NoteFormatPipe],
+  imports: [NoteFormatPipe, RouterLink],
   templateUrl: './guide-list.html',
   styleUrl: './guide-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GuideList {
   private readonly guideService = inject(GuideService);
+  private readonly notification = inject(NotificationService);
 
   /** Toutes les données (source unique : le service). */
   readonly guides = computed(() => this.guideService.getGuides());
@@ -75,5 +87,45 @@ export class GuideList {
     this.recherche.set('');
     this.regionChoisie.set('');
     this.statutChoisi.set('');
+  }
+
+  // --- Suppression avec confirmation (Part D) ---
+
+  /** Guide en attente de confirmation de suppression (`null` : aucune demande en cours). */
+  readonly guideASupprimer = signal<GuideTouristique | null>(null);
+
+  private readonly dialogue = viewChild<ElementRef<HTMLDialogElement>>('dialogueSuppression');
+
+  /** Ouvre la boîte de confirmation (le navigateur gère le focus et la touche Échap). */
+  demanderSuppression(guide: GuideTouristique): void {
+    this.guideASupprimer.set(guide);
+    this.dialogue()?.nativeElement.showModal();
+  }
+
+  confirmerSuppression(): void {
+    const guide = this.guideASupprimer();
+    if (!guide) {
+      return;
+    }
+    if (this.guideService.deleteGuide(guide.id)) {
+      this.notification.succes(`Le guide ${guide.prenom} ${guide.nom} a été supprimé.`);
+    } else {
+      this.notification.erreur('Suppression impossible : ce guide n\'existe plus.');
+    }
+    this.fermerDialogue();
+  }
+
+  annulerSuppression(): void {
+    this.fermerDialogue();
+  }
+
+  /** Appelé aussi quand la boîte se ferme avec la touche Échap. */
+  onDialogueFermee(): void {
+    this.guideASupprimer.set(null);
+  }
+
+  private fermerDialogue(): void {
+    this.dialogue()?.nativeElement.close();
+    this.guideASupprimer.set(null);
   }
 }
