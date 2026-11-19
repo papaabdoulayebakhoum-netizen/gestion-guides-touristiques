@@ -1,36 +1,85 @@
 :host {
   display: block;
-  --vert: #087f73;
-  --vert-fonce: #05544c;
-  --bord: #d5dde0;
-  --fond-carte: #ffffff;
-  --texte: #1c2a2e;
-  --texte-doux: #55666b;
+  min-height: 100vh;
+  background: #fbf6ec;
+  --vert: #0b6b4f;
+  --vert-fonce: #084c38;
+  --jaune: #fdb913;
+  --rouge: #d62828;
+  --sable: #fbf6ec;
+  --bord: #e6dcc6;
+  --texte: #1f2a24;
+  --texte-doux: #5b665f;
 }
 
 .guide-list {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 1rem 2rem;
   color: var(--texte);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+/* ---------- Bandeau ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 -1rem;
+  padding: 2.5rem 1.5rem 4.5rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--vert-fonce) 0%, var(--vert) 60%, #14906a 100%);
+}
+
+.hero-soleil {
+  position: absolute;
+  top: -70px;
+  right: -50px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffd54a, var(--jaune) 60%, #f08a00);
+  opacity: 0.95;
+}
+
+.hero > *:not(.hero-soleil) {
+  position: relative;
+  max-width: 640px;
+}
+
+.hero-sur-titre {
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--jaune);
 }
 
 h2 {
-  color: var(--vert);
-  margin: 0 0 1rem;
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.15;
 }
 
-/* ---------- Recherche + filtres ---------- */
+.hero-sous-titre {
+  margin: 0.75rem 0 0;
+  font-size: 1.05rem;
+  opacity: 0.92;
+}
+
+/* ---------- Recherche + filtres (carte flottante) ---------- */
 .filtres {
+  position: relative;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr auto;
   gap: 0.75rem;
   align-items: end;
-  padding: 1rem;
-  background: #f3f8f7;
+  margin-top: -2.5rem;
+  padding: 1.1rem;
+  background: #fff;
   border: 1px solid var(--bord);
-  border-radius: 10px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(11, 107, 79, 0.15);
 }
 
 .champ {
@@ -40,34 +89,37 @@ h2 {
 }
 
 label {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--vert-fonce);
 }
 
 input,
 select {
-  padding: 0.6rem 0.7rem;
+  padding: 0.65rem 0.75rem;
   font-size: 1rem;
-  border: 1px solid #9fb0b4;
-  border-radius: 6px;
-  background: #fff;
+  border: 1.5px solid #c9c1ad;
+  border-radius: 10px;
+  background: #fffdf8;
 }
 
 input:focus-visible,
 select:focus-visible,
 button:focus-visible {
-  outline: 3px solid #f2b705;
+  outline: 3px solid var(--jaune);
   outline-offset: 2px;
 }
 
 .btn-reset {
-  padding: 0.6rem 1rem;
+  padding: 0.65rem 1.1rem;
   font-size: 0.95rem;
+  font-weight: 700;
   color: #fff;
   background: var(--vert);
   border: 0;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 .btn-reset:hover:not(:disabled) {
@@ -75,51 +127,106 @@ button:focus-visible {
 }
 
 .btn-reset:disabled {
-  background: #9fb0b4;
+  background: #b9b3a2;
   cursor: not-allowed;
 }
 
 .compteur {
-  margin: 1rem 0 0.5rem;
+  margin: 1.25rem 0 0.75rem;
   color: var(--texte-doux);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
 /* ---------- Cartes ---------- */
 .cartes {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.1rem;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
 .carte {
-  padding: 1rem;
-  background: var(--fond-carte);
+  position: relative;
+  padding: 1.2rem 1.1rem 1rem;
+  background: #fff;
   border: 1px solid var(--bord);
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+/* Liseré vert - jaune - rouge */
+.carte::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--vert) 0 33%, var(--jaune) 33% 66%, var(--rouge) 66% 100%);
+}
+
+.carte:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(11, 107, 79, 0.18);
 }
 
 .carte-entete {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.75rem;
   margin-bottom: 0.75rem;
 }
 
-.carte-entete h3 {
+.avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--vert);
+  border: 3px solid var(--jaune);
+  border-radius: 50%;
+}
+
+.identite {
+  flex: 1;
+  min-width: 0;
+}
+
+.identite h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.region {
+  margin: 0.1rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--vert);
+}
+
+.specialite {
+  margin: 0 0 0.75rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.93rem;
+  color: var(--texte);
+  background: #f4efe1;
+  border-left: 4px solid var(--jaune);
+  border-radius: 6px;
 }
 
 .carte-infos {
-  margin: 0;
   display: grid;
-  gap: 0.4rem;
+  gap: 0.3rem;
+  margin: 0 0 0.75rem;
 }
 
 .carte-infos div {
@@ -128,14 +235,14 @@ button:focus-visible {
 }
 
 .carte-infos dt {
-  min-width: 5.5rem;
+  min-width: 5rem;
+  font-size: 0.85rem;
   color: var(--texte-doux);
-  font-size: 0.9rem;
 }
 
 .carte-infos dd {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .email {
@@ -143,20 +250,39 @@ button:focus-visible {
 }
 
 .note {
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0.25rem 0.7rem;
+  font-weight: 800;
+  background: #fff4cc;
+  border-radius: 999px;
 }
 
-.note span {
-  color: #e0a100;
+.etoile {
+  color: #e29a00;
 }
 
-/* ---------- Badges de statut (texte + couleur) ---------- */
+/* ---------- Badges de statut (texte + point) ---------- */
 .badge {
-  padding: 0.2rem 0.6rem;
-  font-size: 0.78rem;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: none;
+  padding: 0.22rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 800;
   border-radius: 999px;
   white-space: nowrap;
+}
+
+.badge::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .badge-disponible {
@@ -165,18 +291,18 @@ button:focus-visible {
 }
 
 .badge-indisponible {
-  color: #5b1f1f;
-  background: #f6d3d3;
+  color: #8a1c1c;
+  background: #fbdcdc;
 }
 
 /* ---------- État vide ---------- */
 .etat-vide {
-  padding: 2rem 1rem;
+  padding: 2.5rem 1rem;
   text-align: center;
   color: var(--texte-doux);
-  background: #fafafa;
+  background: #fff;
   border: 2px dashed var(--bord);
-  border-radius: 10px;
+  border-radius: 16px;
 }
 
 /* ---------- Responsive ---------- */
@@ -193,61 +319,24 @@ button:focus-visible {
   .filtres {
     grid-template-columns: 1fr;
   }
-  .guide-list {
-    padding: 0.75rem;
+  .hero {
+    padding: 2rem 1rem 4rem;
+  }
+  .hero-soleil {
+    width: 170px;
+    height: 170px;
+  }
+  .carte-entete {
+    flex-wrap: wrap;
   }
 }
 
-/* ---------- Partie D : en-tête, actions des cartes, boîte de confirmation ---------- */
-.entete-liste {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.entete-liste h2 {
-  margin: 0;
-}
-
-.carte-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--bord);
-}
-
-.carte-actions .btn {
-  flex: 1;
-}
-
-.etat-vide .btn {
-  margin-top: 0.5rem;
-}
-
-.dialogue {
-  max-width: min(90vw, 420px);
-  padding: 1.25rem;
-  color: var(--texte);
-  border: 1px solid var(--bord);
-  border-radius: 10px;
-}
-
-.dialogue::backdrop {
-  background: rgba(0, 0, 0, 0.45);
-}
-
-.dialogue h3 {
-  margin: 0 0 0.75rem;
-  color: #8c1d18;
-}
-
-.dialogue-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: 1rem;
+@media (prefers-reduced-motion: reduce) {
+  .carte,
+  .btn-reset {
+    transition: none;
+  }
+  .carte:hover {
+    transform: none;
+  }
 }
