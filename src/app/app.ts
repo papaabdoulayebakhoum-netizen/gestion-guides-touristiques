@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { GuideList } from './components/guide-list/guide-list'; // Import du composant d'Abdoulaye
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
+  standalone: true,
+  imports: [GuideList], // On l'ajoute ici pour qu'Angular le reconnaisse
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('gestion-guides-touristiques');
+export class AppComponent {
+  title = 'gestion-guides-touristiques';
 }
