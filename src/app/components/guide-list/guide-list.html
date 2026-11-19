@@ -1,5 +1,8 @@
 <section class="guide-list" aria-labelledby="titre-liste">
-  <h2 id="titre-liste">Répertoire des guides touristiques</h2>
+  <div class="entete-liste">
+    <h2 id="titre-liste">Répertoire des guides touristiques</h2>
+    <a routerLink="/guides/nouveau" class="btn btn-primary">+ Ajouter un guide</a>
+  </div>
 
   <!-- Recherche + filtres -->
   <form class="filtres" role="search" (submit)="$event.preventDefault()">
@@ -82,6 +85,24 @@
               <dd class="note"><span aria-hidden="true">★</span> {{ guide.note | noteFormat }}</dd>
             </div>
           </dl>
+
+          <div class="carte-actions">
+            <a
+              class="btn btn-secondary"
+              [routerLink]="['/guides', guide.id, 'modifier']"
+              [attr.aria-label]="'Modifier la fiche de ' + guide.prenom + ' ' + guide.nom"
+            >
+              Modifier
+            </a>
+            <button
+              type="button"
+              class="btn btn-danger-outline"
+              (click)="demanderSuppression(guide)"
+              [attr.aria-label]="'Supprimer la fiche de ' + guide.prenom + ' ' + guide.nom"
+            >
+              Supprimer
+            </button>
+          </div>
         </li>
       }
     </ul>
@@ -89,6 +110,7 @@
     <div class="etat-vide">
       <p><strong>Aucun guide enregistré pour le moment.</strong></p>
       <p>Ajoutez un premier guide avec le formulaire.</p>
+      <a routerLink="/guides/nouveau" class="btn btn-primary">Ajouter un guide</a>
     </div>
   } @else {
     <div class="etat-vide">
@@ -100,3 +122,24 @@
     </div>
   }
 </section>
+
+<!-- Confirmation avant suppression : <dialog> natif (focus piégé, fermeture avec Échap). -->
+<dialog
+  #dialogueSuppression
+  class="dialogue"
+  aria-labelledby="titre-dialogue"
+  aria-describedby="texte-dialogue"
+  (close)="onDialogueFermee()"
+>
+  <h3 id="titre-dialogue">Supprimer ce guide ?</h3>
+  @if (guideASupprimer(); as guide) {
+    <p id="texte-dialogue">
+      La fiche de <strong>{{ guide.prenom }} {{ guide.nom }}</strong> sera supprimée définitivement.
+      Cette action est irréversible.
+    </p>
+  }
+  <div class="dialogue-actions">
+    <button type="button" class="btn btn-secondary" (click)="annulerSuppression()" autofocus>Annuler</button>
+    <button type="button" class="btn btn-danger" (click)="confirmerSuppression()">Supprimer</button>
+  </div>
+</dialog>

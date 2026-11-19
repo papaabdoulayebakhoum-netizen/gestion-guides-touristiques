@@ -1,0 +1,95 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* ---------- Lien d'évitement (visible uniquement au focus clavier) ---------- */
+.lien-evitement {
+  position: absolute;
+  top: -4rem;
+  left: 0.5rem;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  color: #fff;
+  background: var(--vert-fonce);
+  border-radius: 0 0 6px 6px;
+}
+
+.lien-evitement:focus {
+  top: 0;
+  outline: 3px solid #f2b705;
+}
+
+/* ---------- En-tête ---------- */
+.entete {
+  background: var(--vert);
+  color: #fff;
+}
+
+.entete-contenu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.9rem 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+nav a {
+  padding: 0.45rem 0.9rem;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+nav a.actif {
+  background: var(--vert-fonce);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+nav a:focus-visible {
+  outline: 3px solid #f2b705;
+  outline-offset: 2px;
+}
+
+/* ---------- Pied de page ---------- */
+.pied {
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--texte-doux);
+  border-top: 1px solid var(--bord);
+}
+
+.pied p {
+  margin: 0;
+}

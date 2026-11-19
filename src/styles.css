@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+/* Styles globaux : couleurs communes et boutons réutilisés par plusieurs composants. */
+:root {
+  --vert: #087f73;
+  --vert-fonce: #05544c;
+  --bord: #d5dde0;
+  --texte: #1c2a2e;
+  --texte-doux: #55666b;
+  --erreur: #b3261e;
+  --erreur-fond: #fdecea;
+}
+
+body {
+  margin: 0;
+  color: var(--texte);
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+}
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn:focus-visible {
+  outline: 3px solid #f2b705;
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  color: #fff;
+  background: var(--vert);
+}
+
+.btn-primary:hover {
+  background: var(--vert-fonce);
+}
+
+.btn-secondary {
+  color: var(--vert-fonce);
+  background: #fff;
+  border-color: var(--vert);
+}
+
+.btn-secondary:hover {
+  background: #eef6f5;
+}
+
+.btn-danger {
+  color: #fff;
+  background: #b3261e;
+}
+
+.btn-danger:hover {
+  background: #8c1d18;
+}
+
+.btn-danger-outline {
+  color: #8c1d18;
+  background: #fff;
+  border-color: #b3261e;
+}
+
+.btn-danger-outline:hover {
+  background: var(--erreur-fond);
+}

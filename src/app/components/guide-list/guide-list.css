@@ -197,3 +197,57 @@ button:focus-visible {
     padding: 0.75rem;
   }
 }
+
+/* ---------- Partie D : en-tête, actions des cartes, boîte de confirmation ---------- */
+.entete-liste {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.entete-liste h2 {
+  margin: 0;
+}
+
+.carte-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--bord);
+}
+
+.carte-actions .btn {
+  flex: 1;
+}
+
+.etat-vide .btn {
+  margin-top: 0.5rem;
+}
+
+.dialogue {
+  max-width: min(90vw, 420px);
+  padding: 1.25rem;
+  color: var(--texte);
+  border: 1px solid var(--bord);
+  border-radius: 10px;
+}
+
+.dialogue::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.dialogue h3 {
+  margin: 0 0 0.75rem;
+  color: #8c1d18;
+}
+
+.dialogue-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
