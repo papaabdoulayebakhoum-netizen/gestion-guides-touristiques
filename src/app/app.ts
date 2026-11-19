@@ -1,12 +1,14 @@
 import { Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { NotificationComponent } from './components/notification/notification';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { GuideList } from './components/guide-list/guide-list';
+import { GuideForm } from './components/guide-form/guide-form';
 
 @Component({
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NotificationComponent],
   selector: 'app-root',
-  styleUrl: './app.css',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, GuideList, GuideForm],
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('Guides touristiques du Sénégal');

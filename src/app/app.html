@@ -22,3 +22,21 @@
 <footer class="pied">
   <p>Évaluation finale Angular · Licence 2 Ingénierie Informatique · données fictives</p>
 </footer>
+<!-- Lien d'évitement -->
+<a class="lien-evitement" href="#contenu">Aller au contenu</a>
+
+<header class="entete">
+  <div class="entete-contenu">
+    <h1>{{ title() }}</h1>
+    <nav aria-label="Navigation principale">
+      <a routerLink="/guides" routerLinkActive="actif">Répertoire</a>
+      <a routerLink="/guides/nouveau" routerLinkActive="actif">Ajout</a>
+    </nav>
+  </div>
+</header>
+
+<app-notification />
+
+<main id="contenu">
+  <router-outlet />
+</main>
