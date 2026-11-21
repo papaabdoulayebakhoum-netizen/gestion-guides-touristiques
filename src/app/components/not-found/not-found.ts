@@ -21,9 +21,9 @@ import { RouterLink } from '@angular/router';
       margin: 2rem auto;
       padding: 2rem 1rem;
       text-align: center;
-      background: #fafafa;
+      background: #fff;
       border: 2px dashed var(--bord);
-      border-radius: 10px;
+      border-radius: 16px;
     }
     h2 {
       margin-top: 0;

@@ -340,3 +340,51 @@ button:focus-visible {
     transform: none;
   }
 }
+
+/* ---------- Parties D et E : actions des cartes, état vide, boîte de confirmation ---------- */
+.carte-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--bord);
+}
+
+.carte-actions .btn {
+  flex: 1;
+}
+
+.etat-vide .btn {
+  margin-top: 0.5rem;
+}
+
+.dialogue {
+  max-width: min(90vw, 420px);
+  padding: 1.4rem;
+  color: var(--texte);
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-top: 5px solid var(--rouge);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.dialogue::backdrop {
+  background: rgba(8, 76, 56, 0.55);
+}
+
+.dialogue h3 {
+  margin: 0 0 0.75rem;
+  color: #8a1c1c;
+}
+
+.dialogue p {
+  margin: 0;
+}
+
+.dialogue-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}

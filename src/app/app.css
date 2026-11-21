@@ -27,12 +27,12 @@ main:focus {
 
 .lien-evitement:focus {
   top: 0;
-  outline: 3px solid #f2b705;
+  outline: 3px solid var(--jaune);
 }
 
 /* ---------- En-tête ---------- */
 .entete {
-  background: var(--vert);
+  background: var(--vert-fonce);
   color: #fff;
 }
 
@@ -71,12 +71,12 @@ nav a:hover {
 }
 
 nav a.actif {
-  background: var(--vert-fonce);
+  background: rgba(255, 255, 255, 0.18);
   border-color: rgba(255, 255, 255, 0.6);
 }
 
 nav a:focus-visible {
-  outline: 3px solid #f2b705;
+  outline: 3px solid var(--jaune);
   outline-offset: 2px;
 }
 

@@ -24,9 +24,10 @@ h2 {
   grid-template-columns: 1fr 1fr;
   gap: 1rem 1.25rem;
   padding: 1.25rem;
-  background: #f3f8f7;
+  background: #fff;
   border: 1px solid var(--bord);
-  border-radius: 10px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(11, 107, 79, 0.12);
 }
 
 .champ {
@@ -37,7 +38,8 @@ h2 {
 
 label {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--vert-fonce);
 }
 
 .obligatoire {
@@ -49,14 +51,14 @@ select {
   padding: 0.6rem 0.7rem;
   font: inherit;
   font-size: 1rem;
-  background: #fff;
-  border: 1px solid #9fb0b4;
-  border-radius: 6px;
+  background: #fffdf8;
+  border: 1.5px solid #c9c1ad;
+  border-radius: 10px;
 }
 
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid #f2b705;
+  outline: 3px solid var(--jaune);
   outline-offset: 2px;
 }
 
@@ -109,9 +111,9 @@ select[aria-invalid='true'] {
   padding: 2rem 1rem;
   text-align: center;
   color: var(--texte-doux);
-  background: #fafafa;
+  background: #fff;
   border: 2px dashed var(--bord);
-  border-radius: 10px;
+  border-radius: 16px;
 }
 
 /* Texte lu par les lecteurs d'écran, invisible à l'écran. */

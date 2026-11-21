@@ -1,10 +1,14 @@
 /* Styles globaux : couleurs communes et boutons réutilisés par plusieurs composants. */
 :root {
-  --vert: #087f73;
-  --vert-fonce: #05544c;
-  --bord: #d5dde0;
-  --texte: #1c2a2e;
-  --texte-doux: #55666b;
+  /* Palette commune à toutes les pages (reprend le design du répertoire). */
+  --vert: #0b6b4f;
+  --vert-fonce: #084c38;
+  --jaune: #fdb913;
+  --rouge: #d62828;
+  --sable: #fbf6ec;
+  --bord: #e6dcc6;
+  --texte: #1f2a24;
+  --texte-doux: #5b665f;
   --erreur: #b3261e;
   --erreur-fond: #fdecea;
 }
@@ -12,8 +16,14 @@
 body {
   margin: 0;
   color: var(--texte);
-  font-family: Arial, Helvetica, sans-serif;
-  background: #fff;
+  font-family:
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    Roboto,
+    Arial,
+    sans-serif;
+  background: var(--sable);
 }
 
 /* ---------- Boutons ---------- */
@@ -22,16 +32,17 @@ body {
   padding: 0.6rem 1rem;
   font: inherit;
   font-size: 0.95rem;
+  font-weight: 700;
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .btn:focus-visible {
-  outline: 3px solid #f2b705;
+  outline: 3px solid var(--jaune);
   outline-offset: 2px;
 }
 
@@ -51,7 +62,7 @@ body {
 }
 
 .btn-secondary:hover {
-  background: #eef6f5;
+  background: #eaf4ef;
 }
 
 .btn-danger {
