@@ -47,6 +47,6 @@
 }
 
 .fermer:focus-visible {
-  outline: 3px solid #f2b705;
+  outline: 3px solid var(--jaune);
   outline-offset: 2px;
 }
