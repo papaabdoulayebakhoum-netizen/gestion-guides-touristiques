@@ -160,13 +160,31 @@ button:focus-visible {
     box-shadow 0.2s;
 }
 
-/* Liseré vert - jaune - rouge */
+/* Liseré vert - jaune - rouge, comme le drapeau du Sénégal */
+.carte {
+  --bande: 12px;
+  --etoile: 10px;
+}
+
 .carte::before {
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
-  height: 5px;
+  height: var(--bande);
   background: linear-gradient(90deg, var(--vert) 0 33%, var(--jaune) 33% 66%, var(--rouge) 66% 100%);
+}
+
+/* Étoile verte à cinq branches, au centre de la bande jaune (décorative) */
+.carte::after {
+  content: '';
+  position: absolute;
+  top: calc((var(--bande) - var(--etoile)) / 2);
+  left: 50%;
+  width: var(--etoile);
+  height: var(--etoile);
+  transform: translateX(-50%);
+  background: var(--vert);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
 .carte:hover {
